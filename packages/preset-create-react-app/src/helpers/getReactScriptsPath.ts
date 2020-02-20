@@ -55,4 +55,21 @@ const getReactScriptsPath = (): string => {
   return '';
 };
 
-export { getReactScriptsPath };
+const getReactScriptsPathWithYarnPnp = (
+  packageName = 'react-scripts',
+): string => {
+  // eslint-disable-next-line import/no-unresolved,@typescript-eslint/no-var-requires,global-require
+  const pnpApi = require('pnpapi');
+  const { packageDependencies } = pnpApi.getPackageInformation({
+    name: null,
+    reference: null,
+  });
+
+  const { packageLocation } = pnpApi.getPackageInformation(
+    pnpApi.getLocator(packageName, packageDependencies.get(packageName)),
+  );
+
+  return packageLocation;
+};
+
+export { getReactScriptsPath, getReactScriptsPathWithYarnPnp };
