@@ -20,7 +20,7 @@ Once installed, add this preset to the appropriate file:
 
   ```js
   module.exports = {
-    addons: ['@storybook/preset-typescript']
+    addons: ['@storybook/preset-typescript'],
   };
   ```
 
